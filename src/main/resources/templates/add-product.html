@@ -1,0 +1,92 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">EMT 2021 SHOP</h1>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <form action="/products/add" method="POST">
+                    <input id="id" type="hidden" name="id" th:value="(${book} != null ? ${book.getId()} : '')">
+                    <div class="form-group">
+                        <label for="name">Book name</label>
+                        <input type="text"
+                               class="form-control"
+                               id="name"
+                               name="name"
+                               th:value="(${book} != null ? ${book.getName()} : '')"
+                               required
+                               placeholder="Enter product name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="availableCopies">Available Copies</label>
+                        <input type="text"
+                               class="form-control"
+                               id="availableCopies"
+                               name="availableCopies"
+                               th:value="(${book} != null ? ${book.getQuantity()} : '')"
+                               placeholder="Available Copies">
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select name="category" class="form-control">
+
+                            <option th:if="${book} == null"
+                                    th:value="NOVEL"
+                                    th:text="NOVEL">
+                            </option>
+                            <option th:if="${book} == null"
+                                    th:value="THRILER"
+                                    th:text="THRILER">
+                            </option>
+                            <option th:if="${book} == null"
+                                    th:value="HISTORY"
+                                    th:text="HISTORY">
+                            </option>
+                            <option th:if="${book} == null"
+                                    th:value="FANTASY"
+                                    th:text="FANTASY">
+                            </option>
+                            <option th:if="${book} == null"
+                                    th:value="BIOGRAPHY"
+                                    th:text="BIOGRAPHY">
+                            </option>
+                            <option th:if="${book} == null"
+                                    th:value="CLASSICS"
+                                    th:text="CLASSICS">
+                            </option>
+                            <option th:if="${book} == null"
+                                    th:value="DRAMA"
+                                    th:text="DRAMA">
+                            </option>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Author</label>
+                        <select name="manufacturer" class="form-control">
+                            <option th:if="${book} != null"
+                                    th:selected="${book.getAuthor() != null && book.getAuthor().getId() == aut.getId()}"
+                                    th:each="aut : ${manufacturers}"
+                                    th:value="${aut.getId()}"
+                                    th:text="${aut.getName()}">
+                            </option>
+                            <option th:if="${product} == null"
+                                    th:each="aut : ${authors}"
+                                    th:value="${aut.getId()}"
+                                    th:text="${aut.getName()}">
+                            </option>
+                        </select>
+                    </div>
+                    <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+                    <a type="button" class="btn btn-primary" href="/products">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</th:block>
